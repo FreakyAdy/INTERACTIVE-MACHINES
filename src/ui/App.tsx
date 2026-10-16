@@ -47,46 +47,13 @@ export class LazyRouteErrorBoundary extends Component<
   }
 }
 
-function LanguageSwitch() {
-  const { i18n, t } = useTranslation()
-  const language = useUiStore((state) => state.language)
-  const setLanguage = useUiStore((state) => state.setLanguage)
-
-  useEffect(() => {
-    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'
-  }, [language])
-
-  const chooseLanguage = (nextLanguage: UiLanguage) => {
-    void i18n.changeLanguage(nextLanguage)
-    setLanguage(nextLanguage)
-  }
-
-  return (
-    <div aria-label={t('app.language')} className="language-switch" role="group">
-      <button
-        aria-pressed={language === 'zh'}
-        onClick={() => chooseLanguage('zh')}
-        type="button"
-      >
-        中文
-      </button>
-      <button
-        aria-pressed={language === 'en'}
-        onClick={() => chooseLanguage('en')}
-        type="button"
-      >
-        EN
-      </button>
-    </div>
-  )
-}
-
 export default function App() {
   const { t } = useTranslation()
   const language = useUiStore((state) => state.language)
   const path = useCurrentPath()
 
   useEffect(() => {
+    document.documentElement.lang = 'en'
     document.title = t('app.pageTitle')
     document
       .querySelector('meta[name="description"]')
@@ -102,7 +69,6 @@ export default function App() {
           <span className="brand-mark">{t('app.brand')}</span>
           <span className="brand-subtitle">{t('app.subtitle')}</span>
         </a>
-        <LanguageSwitch />
       </header>
       <LazyRouteErrorBoundary
         key={language}

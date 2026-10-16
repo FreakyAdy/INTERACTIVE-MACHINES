@@ -159,6 +159,15 @@ function requestMessages(messages: readonly UiMessage[]): ApiMessage[] {
     .slice(-6);
 }
 
+const BOOK_EN: Record<string, string> = {
+  新儀象法要: "Xin Yi Xiang Fa Yao",
+  後漢書: "Book of the Later Han",
+  宋史: "History of Song",
+  西京雜記: "Xi Jing Za Ji",
+  三國志: "San Guo Zhi",
+  中国丝绸博物馆老官山织机复原研究: "Laoguanshan Loom Study",
+};
+
 function GroundedAnswer({
   text,
   module,
@@ -174,14 +183,15 @@ function GroundedAnswer({
         if (segment.kind === "text") {
           return <span key={`${index}:text`}>{segment.text}</span>;
         }
+        const title = BOOK_EN[segment.book] ?? segment.book;
         return (
           <sup
             className="docent-cite"
             data-testid="docent-citation"
             key={`${index}:${segment.id}`}
-            title={segment.book}
+            title={title}
           >
-            {segment.book}
+            {title}
           </sup>
         );
       })}

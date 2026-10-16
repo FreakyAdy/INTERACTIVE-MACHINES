@@ -3,12 +3,12 @@
   right: max(1rem, env(safe-area-inset-right));
   bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 40;
-  border: 1px solid rgba(213, 181, 111, 0.55);
+  border: 1px solid rgba(16, 185, 129, 0.55);
   border-radius: 999px;
-  background: #231c17;
-  color: #f5e7c8;
+  background: #0d1511;
+  color: #f1f5f3;
   padding: 0.7rem 1rem;
-  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.45), 0 0 16px rgba(16, 185, 129, 0.2);
   cursor: pointer;
 }
 
@@ -41,10 +41,10 @@
   display: flex;
   width: min(26rem, 100vw);
   flex-direction: column;
-  border-left: 1px solid rgba(213, 181, 111, 0.35);
-  background: rgba(24, 19, 16, 0.98);
-  color: #f7edd8;
-  box-shadow: -1rem 0 3rem rgba(0, 0, 0, 0.38);
+  border-left: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(7, 12, 10, 0.98);
+  color: #f1f5f3;
+  box-shadow: -1rem 0 3rem rgba(0, 0, 0, 0.5);
 }
 
 .docent-header,
@@ -57,7 +57,7 @@
 
 .docent-header {
   justify-content: space-between;
-  border-bottom: 1px solid rgba(213, 181, 111, 0.22);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .docent-close {
@@ -82,13 +82,19 @@
 
 .docent-suggestion,
 .docent-retry {
-  border: 1px solid rgba(213, 181, 111, 0.35);
+  border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: 0.65rem;
-  background: rgba(213, 181, 111, 0.08);
+  background: rgba(16, 185, 129, 0.08);
   color: inherit;
   padding: 0.6rem 0.7rem;
   text-align: left;
   cursor: pointer;
+}
+
+.docent-suggestion:hover,
+.docent-retry:hover {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: #10b981;
 }
 
 .docent-message {
@@ -101,54 +107,66 @@
 
 .docent-message-user {
   margin-left: 2.5rem;
-  background: rgba(213, 181, 111, 0.15);
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 .docent-message-assistant {
   margin-right: 1.5rem;
-  background: rgba(255, 255, 255, 0.055);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .docent-cite {
   margin-left: 2px;
-  color: var(--gold, #d5a44e);
+  color: #34d399;
   cursor: help;
 }
 
 .docent-status {
-  border-left: 0.2rem solid #b96b5d;
+  border-left: 0.2rem solid #ef4444;
   padding: 0.55rem 0.7rem;
-  color: #f0bcb2;
+  color: #fca5a5;
 }
 
 .docent-composer {
-  border-top: 1px solid rgba(213, 181, 111, 0.22);
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .docent-input {
   min-width: 0;
   flex: 1;
-  border: 1px solid rgba(213, 181, 111, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 0.6rem;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.35);
   color: inherit;
   padding: 0.65rem 0.75rem;
+}
+
+.docent-input:focus {
+  outline: 2px solid #10b981;
 }
 
 .docent-send {
   border: 0;
   border-radius: 0.6rem;
-  background: #b88a42;
-  color: #18130f;
+  background: #10b981;
+  color: #03140a;
+  font-weight: 600;
   padding: 0.65rem 0.8rem;
   cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.docent-send:hover {
+  background: #34d399;
 }
 
 @media (max-width: 640px) {
   .docent-drawer {
     top: 12vh;
     width: 100vw;
-    border-top: 1px solid rgba(213, 181, 111, 0.35);
+    border-top: 1px solid rgba(16, 185, 129, 0.35);
     border-left: 0;
   }
 }

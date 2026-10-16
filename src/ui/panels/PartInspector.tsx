@@ -80,6 +80,12 @@ const NOTE_ZH: Record<string, string> = {
 
 const BOOK_EN: Record<string, string> = {
   新儀象法要: "Xin Yi Xiang Fa Yao",
+  後漢書: "Book of the Later Han (Hou Han Shu)",
+  宋史: "History of Song (Song Shi)",
+  西京雜記: "Miscellaneous Records of the Western Capital (Xi Jing Za Ji)",
+  三國志: "Records of the Three Kingdoms (San Guo Zhi)",
+  中国丝绸博物馆老官山织机复原研究:
+    "China National Silk Museum Laoguanshan Loom Study",
 };
 
 const localizedNote = (note: string, language: Lang) =>

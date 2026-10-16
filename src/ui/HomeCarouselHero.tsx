@@ -411,9 +411,9 @@ function RoundPlatform({ radius }: { radius: number }) {
       <mesh position={[0, PLATFORM_TOP / 2, 0]}>
         <cylinderGeometry args={[radius, radius, PLATFORM_TOP, 72]} />
         <meshStandardMaterial
-          color="#4f2d19"
-          metalness={0.06}
-          roughness={0.72}
+          color="#101814"
+          metalness={0.2}
+          roughness={0.6}
         />
       </mesh>
       <mesh
@@ -424,7 +424,7 @@ function RoundPlatform({ radius }: { radius: number }) {
           args={[radius * 0.72, radius * 0.725, 72, 1, 0, Math.PI * 2]}
         />
         <meshBasicMaterial
-          color="#c88a42"
+          color="#10b981"
           polygonOffset
           polygonOffsetFactor={-2}
           polygonOffsetUnits={-2}
@@ -701,7 +701,7 @@ function TurntableStage({
       }}
       onCreated={prepareSceneEnvironment}
     >
-      <color args={["#090a0a"]} attach="background" />
+      <color args={["#060807"]} attach="background" />
       <SceneEnvironment />
       <FixedCamera />
       <WarmLightRig />

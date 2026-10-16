@@ -1,8 +1,8 @@
 const MACHINES = [
-  { name: "Astronomical Clock", zh: "水运仪象台", slug: "astroclock" },
-  { name: "Seismoscope", zh: "候风地动仪", slug: "seismoscope" },
-  { name: "Odometer Carriage", zh: "记里鼓车", slug: "odometer" },
-  { name: "Pattern Loom", zh: "汉代提花织机", slug: "loom" },
+  { name: "Astronomical Clock", slug: "astroclock" },
+  { name: "Seismoscope", slug: "seismoscope" },
+  { name: "Odometer Carriage", slug: "odometer" },
+  { name: "Pattern Loom", slug: "loom" },
 ];
 
 export default function CoverPage() {
@@ -90,7 +90,6 @@ export default function CoverPage() {
               href={`#/m/${m.slug}`}
               title={`View ${m.name}`}
             >
-              <span className="chip-zh">{m.zh}</span>
               <span className="chip-en">{m.name}</span>
             </a>
           ))}
