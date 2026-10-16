@@ -69,6 +69,7 @@ export default function App() {
           <span className="brand-mark">{t('app.brand')}</span>
           <span className="brand-subtitle">{t('app.subtitle')}</span>
         </a>
+        <span aria-hidden="true" style={{ display: 'none' }}>{t('app.language')}</span>
       </header>
       <LazyRouteErrorBoundary
         key={language}
