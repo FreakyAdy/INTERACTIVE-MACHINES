@@ -1,4 +1,9 @@
-const MACHINE_NAMES = ["Astronomical Clock", "Seismoscope", "Odometer", "Loom"];
+const MACHINES = [
+  { name: "Astronomical Clock", zh: "水运仪象台", slug: "astroclock" },
+  { name: "Seismoscope", zh: "候风地动仪", slug: "seismoscope" },
+  { name: "Odometer Carriage", zh: "记里鼓车", slug: "odometer" },
+  { name: "Pattern Loom", zh: "汉代提花织机", slug: "loom" },
+];
 
 export default function CoverPage() {
   return (
@@ -24,36 +29,38 @@ export default function CoverPage() {
 
       <header className="cover-header">
         <span className="cover-brand">Mechanica</span>
-        <span className="cover-pill">Archived</span>
+        <span className="cover-pill">Interactive Exhibition</span>
       </header>
 
       <main className="cover-main">
-        <p className="cover-eyebrow">Thank you</p>
+        <p className="cover-eyebrow">Classical Mechanical Engineering · 3D Physical Simulation</p>
         <h1 className="cover-title">
-          Thank you, OpenAI, <br className="cover-break" />
-          and everyone who liked Mechanica.
+          Ancient Machines Reborn <br className="cover-break" />
+          in Operable 3D Reconstructions
         </h1>
 
         <div className="cover-columns">
           <section>
-            <h2 className="cover-label">Demo video</h2>
+            <h2 className="cover-label">Empirical Precision</h2>
             <p>
-              Thanks to <span className="cover-name">Yunkun</span>,{" "}
-              <span className="cover-name">Olive</span>, and{" "}
-              <span className="cover-name">Ian</span> for helping me record
-              the demo video and for their notes on it.
+              Four lost masterpieces of classical engineering restored from surviving dynastic treatises, 
+              excavated relics, and calibrated kinematic ratios. Every tooth, linkage, and drop bearing carries 
+              complete provenance.
             </p>
           </section>
           <section>
-            <h2 className="cover-label">Status</h2>
+            <h2 className="cover-label">Driveable Mechanics</h2>
             <p>
-              I've stopped working on Mechanica. The site stays up, and the
-              machines still run.
+              Not static turntables—driveable mechanisms. Advance water-regulated escapement chains, 
+              test seismic monostable interlocks, gear down odometer drive shafts, and cycle four-pedal 
+              harness sheds in real time.
             </p>
           </section>
         </div>
 
-        <p className="cover-signature">— Caleb Wei</p>
+        <p className="cover-signature">
+          Original creation by Caleb Wei and Mechanica contributors · Preserved and rendered in full interactive fidelity
+        </p>
 
         <div className="cover-actions">
           <a className="cover-enter" data-testid="cover-enter" href="#/museum">
@@ -72,12 +79,26 @@ export default function CoverPage() {
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </a>
-          <span className="cover-machines">{MACHINE_NAMES.join(" · ")}</span>
+          <span className="cover-machines">{MACHINES.map((m) => m.name).join(" · ")}</span>
+        </div>
+
+        <div className="cover-quick-links">
+          {MACHINES.map((m) => (
+            <a
+              key={m.slug}
+              className="cover-quick-chip"
+              href={`#/m/${m.slug}`}
+              title={`View ${m.name}`}
+            >
+              <span className="chip-zh">{m.zh}</span>
+              <span className="chip-en">{m.name}</span>
+            </a>
+          ))}
         </div>
       </main>
 
       <footer className="cover-footer">
-        <span>Ancient Machines Reborn</span>
+        <span>Ancient Machines Reborn · Interactive Physical Reconstructions</span>
         <span>2026</span>
       </footer>
     </div>
