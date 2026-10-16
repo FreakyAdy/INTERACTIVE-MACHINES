@@ -838,11 +838,18 @@ export default function HomeCarouselHero({
         ) : null}
 
         <div className="home-machine-selector-wrap">
-          <div className="selector-heading">Exhibition Masterworks</div>
+          <div className="selector-heading">
+            <span className="selector-heading-mark">✦</span> Collection Masterworks
+          </div>
           <div className="home-machine-pills" role="group">
             {slugs.map((slug, index) => {
               const data = dataBySlug[slug];
               const isSelected = index === activeIndex;
+              const rawEra = data?.era?.[language] ?? "";
+              const cleanEra = rawEra
+                ? rawEra.split(";")[0]?.split("，")[0]?.split(",")[0]?.trim() || "Classical Era"
+                : "Classical Era";
+
               return (
                 <button
                   aria-pressed={isSelected}
@@ -860,9 +867,7 @@ export default function HomeCarouselHero({
                     <strong className="pill-title">
                       {data?.names[language] ?? slug}
                     </strong>
-                    <span className="pill-era">
-                      {data?.era?.[language]?.split("，")[0]?.split(",")[0] ?? "Classical Era"}
-                    </span>
+                    <span className="pill-era">{cleanEra}</span>
                   </span>
                   <span className="pill-arrow-indicator">›</span>
                 </button>
@@ -878,6 +883,11 @@ export default function HomeCarouselHero({
           data-mounted-machine-count={mountedMachineCount}
           data-testid="home-turntable"
         >
+          <div className="turntable-stage-badge">
+            <span className="stage-badge-dot" />
+            <span>360° Interactive Exhibition</span>
+          </div>
+
           {compact ? (
             <a className="home-carousel-poster-link" href={`#/m/${activeSlug}`}>
               <img
@@ -914,10 +924,10 @@ export default function HomeCarouselHero({
               onClick={() => turnQuarter(1)}
               type="button"
             >
-              ◂
+              ‹
             </button>
             <span className="turntable-hint-text">
-              Drag to spin turntable · Click to explore
+              Drag to Rotate · Click Machine to Explore
             </span>
             <button
               aria-label="Next exhibit"
@@ -925,7 +935,7 @@ export default function HomeCarouselHero({
               onClick={() => turnQuarter(-1)}
               type="button"
             >
-              ▸
+              ›
             </button>
           </div>
         </div>
