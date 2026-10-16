@@ -1,0 +1,1029 @@
+{
+  "slug": "loom",
+  "parts": [
+    {
+      "id": "loom-frame",
+      "name": {
+        "zh": "186号滑框式机架",
+        "en": "No. 186 sliding-frame loom frame"
+      },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomFrame",
+        "params": { "length": 0.85, "width": 0.26, "height": 0.5, "beam": 0.02 }
+      },
+      "material": "wood",
+      "position": [0, 0.25, 0],
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "params.length": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+        "params.width": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+        "params.height": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Beam thickness and the open-frame member layout are display reconstruction choices."
+        }
+      },
+      "dimensionNotes": [
+        {
+          "value": 0.85,
+          "unit": "m",
+          "ancient": "长85厘米",
+          "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" }
+        },
+        {
+          "value": 0.26,
+          "unit": "m",
+          "ancient": "宽26厘米",
+          "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" }
+        },
+        {
+          "value": 0.5,
+          "unit": "m",
+          "ancient": "高50厘米",
+          "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" }
+        }
+      ],
+      "explodeVector": [0, -0.12, 0],
+      "assemblyStep": 0
+    },
+    {
+      "id": "warp-beam",
+      "name": { "zh": "经轴", "en": "Warp beam" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomBeam",
+        "params": { "radius": 0.02, "length": 0.15 }
+      },
+      "material": "wood",
+      "position": [-0.25, 0.285, 0],
+      "rotationEuler": [1.5707963267948966, 0, 0],
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "The surviving models establish a warp beam, but these display dimensions are inferred."
+        }
+      },
+      "explodeVector": [0, 0.2, 0],
+      "assemblyStep": 1
+    },
+    {
+      "id": "cloth-beam",
+      "name": { "zh": "卷布轴", "en": "Cloth beam" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomBeam",
+        "params": { "radius": 0.02, "length": 0.15 }
+      },
+      "material": "wood",
+      "position": [0.25, 0.285, 0],
+      "rotationEuler": [1.5707963267948966, 0, 0],
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "The surviving models establish a cloth beam, but these display dimensions are inferred."
+        }
+      },
+      "explodeVector": [0, -0.2, 0],
+      "assemblyStep": 1
+    },
+    {
+      "id": "treadle-bank",
+      "name": { "zh": "十二蹑踏板组", "en": "Twelve-treadle bank" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomTreadles",
+        "params": {
+          "count": 12,
+          "length": 0.24,
+          "width": 0.007,
+          "depth": 0.007,
+          "spread": 0.13,
+          "cordHeightRatio": 1.25
+        }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.035, 0],
+      "provenance": { "kind": "wenxian", "ref": "sgz-majun-loom" },
+      "dimensionProvenance": {
+        "params.count": {
+          "kind": "wenxian",
+          "ref": "sgz-majun-loom",
+          "note": "Ma Jun's simplified damask loom used twelve treadles."
+        },
+        "@rest": {
+          "kind": "tuice",
+          "ref": "sgz-majun-loom",
+          "note": "Treadle spacing and section dimensions are display reconstruction choices."
+        }
+      },
+      "dimensionNotes": [
+        {
+          "value": 12,
+          "unit": "count",
+          "ancient": "十二躡",
+          "provenance": { "kind": "wenxian", "ref": "sgz-majun-loom" }
+        }
+      ],
+      "explodeVector": [-0.08, -0.16, 0],
+      "assemblyStep": 2,
+      "interactive": true
+    },
+    {
+      "id": "warp-shed",
+      "name": { "zh": "经线与梭口", "en": "Warp threads and shed" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomThreads",
+        "params": {
+          "count": 24,
+          "totalCount": 48,
+          "indexOffset": 0,
+          "indexStep": 2,
+          "length": 0.5,
+          "radius": 0.001,
+          "spread": 0.14
+        }
+      },
+      "material": "silk",
+      "position": [0, 0.28, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.025] },
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Forty-eight threads stand in for the surviving silk traces; count, radius, and span are display choices."
+        }
+      },
+      "explodeVector": [-0.12, 0.1, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "warp-shed-odd",
+      "name": { "zh": "奇数经线层", "en": "Odd warp-thread layer" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomThreads",
+        "params": {
+          "count": 24,
+          "totalCount": 48,
+          "indexOffset": 1,
+          "indexStep": 2,
+          "length": 0.5,
+          "radius": 0.001,
+          "spread": 0.14
+        }
+      },
+      "material": "silk",
+      "position": [0, 0.28, 0],
+      "joint": {
+        "kind": "prismatic",
+        "axis": [0, -1, 0],
+        "limits": [0, 0.025]
+      },
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Twenty-four interleaved threads form the opposing half of the animated shed; count, radius, span, and lift are display choices."
+        }
+      },
+      "explodeVector": [-0.08, 0.12, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "woven-cloth",
+      "name": { "zh": "已织锦面", "en": "Woven brocade panel" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCloth",
+        "params": { "length": 0.18, "thickness": 0.004, "width": 0.14 }
+      },
+      "material": "silk",
+      "position": [0.15, 0.3, 0],
+      "provenance": { "kind": "wenxian", "ref": "xijingzaji-loom" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "xijingzaji-loom",
+          "note": "The texts record brocade production, not this representative panel's dimensions."
+        }
+      },
+      "explodeVector": [0.18, 0.1, 0],
+      "assemblyStep": 6
+    },
+    {
+      "id": "beater",
+      "name": { "zh": "打纬筘框", "en": "Beat-up reed frame" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomBeater",
+        "params": { "length": 0.12, "width": 0.005 }
+      },
+      "material": "wood",
+      "position": [0.045, 0.315, 0],
+      "rotationEuler": [0, 0, 1.5707963267948966],
+      "joint": { "kind": "revolute", "axis": [0, 0, 1], "limits": [0, 0.15] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "A beat-up tool is required by weaving, but its exact surviving form is not specified in the data card."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display-scale reed dimensions."
+        }
+      },
+      "explodeVector": [0.14, 0.08, 0],
+      "assemblyStep": 5
+    },
+    {
+      "id": "shuttle",
+      "name": { "zh": "引纬梭", "en": "Weft shuttle" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomShuttle",
+        "params": { "length": 0.1, "height": 0.012, "width": 0.025 }
+      },
+      "material": "wood",
+      "position": [0.027, 0.32, -0.12],
+      "joint": {
+        "kind": "prismatic",
+        "axis": [0, 0, 1],
+        "limits": [0, 0.24]
+      },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "The weft-insertion shuttle is a functional reconstruction."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display-scale shuttle dimensions."
+        }
+      },
+      "explodeVector": [-0.13, -0.06, -0.14],
+      "assemblyStep": 5
+    },
+    {
+      "id": "single-hook",
+      "name": { "zh": "一勾", "en": "Single selector hook" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHook",
+        "params": { "length": 0.05, "width": 0.006 }
+      },
+      "material": "bronze",
+      "position": [-0.14, 0.35, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.02] },
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "The single-hook principle is evidenced; display dimensions are inferred."
+        }
+      },
+      "explodeVector": [-0.14, 0.12, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "selector-carriage",
+      "name": { "zh": "滑框选综架", "en": "Sliding heddle-selector carriage" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCarriage",
+        "params": { "length": 0.02, "height": 0.012, "width": 0.15 }
+      },
+      "material": "wood",
+      "position": [-0.16, 0.38, 0],
+      "joint": { "kind": "prismatic", "axis": [1, 0, 0], "limits": [0, 0.05] },
+      "provenance": { "kind": "wenwu", "ref": "kaogu-laoguanshan" },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "The no. 186 sliding-frame arrangement is evidenced; section and lift are inferred."
+        }
+      },
+      "explodeVector": [-0.18, 0.08, 0],
+      "assemblyStep": 4,
+      "schemeTags": ["sliding-frame"]
+    },
+    {
+      "id": "weft-counter",
+      "name": { "zh": "纬次计数轮", "en": "Weft counter wheel" },
+      "geometry": { "type": "shaft", "radius": 0.012, "length": 0.025 },
+      "material": "bronze",
+      "position": [0.29, 0.285, 0],
+      "joint": { "kind": "revolute", "axis": [0, 0, 1] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom",
+        "note": "A visible counter represents weaving progress; it is an exhibit abstraction, not an excavated component."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "xijingzaji-loom",
+          "note": "Display counter dimensions."
+        }
+      },
+      "explodeVector": [0.22, -0.04, 0],
+      "assemblyStep": 6
+    },
+    {
+      "id": "selector-cam-0",
+      "name": { "zh": "第一选综凸轮", "en": "Selector cam 1" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, -0.07],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.18, 0.02, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-1",
+      "name": { "zh": "第二选综凸轮", "en": "Selector cam 2" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, -0.05],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.17, 0.04, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-2",
+      "name": { "zh": "第三选综凸轮", "en": "Selector cam 3" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, -0.03],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.16, 0.06, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-3",
+      "name": { "zh": "第四选综凸轮", "en": "Selector cam 4" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, -0.01],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.15, 0.08, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-4",
+      "name": { "zh": "第五选综凸轮", "en": "Selector cam 5" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, 0.01],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.14, 0.1, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-5",
+      "name": { "zh": "第六选综凸轮", "en": "Selector cam 6" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, 0.03],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.13, 0.12, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-6",
+      "name": { "zh": "第七选综凸轮", "en": "Selector cam 7" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, 0.05],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.12, 0.14, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "selector-cam-7",
+      "name": { "zh": "第八选综凸轮", "en": "Selector cam 8" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomCam",
+        "params": { "radius": 0.007, "length": 0.008 }
+      },
+      "material": "wood",
+      "position": [-0.2, 0.18, 0.07],
+      "joint": { "kind": "revolute", "axis": [0, 1, 0] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "kaogu-laoguanshan",
+        "note": "Cam abstraction for the stored selection program."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Display cam dimensions."
+        }
+      },
+      "explodeVector": [-0.1, 0.16, 0],
+      "assemblyStep": 3
+    },
+    {
+      "id": "heddle-0",
+      "name": { "zh": "第一代表综片", "en": "Representative heddle 1" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.115, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [-0.08, 0.18, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-1",
+      "name": { "zh": "第二代表综片", "en": "Representative heddle 2" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.103, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [-0.06, 0.19, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-2",
+      "name": { "zh": "第三代表综片", "en": "Representative heddle 3" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.091, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [-0.04, 0.2, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-3",
+      "name": { "zh": "第四代表综片", "en": "Representative heddle 4" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.079, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [-0.02, 0.21, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-4",
+      "name": { "zh": "第五代表综片", "en": "Representative heddle 5" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.067, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [0.02, 0.21, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-5",
+      "name": { "zh": "第六代表综片", "en": "Representative heddle 6" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.055, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [0.04, 0.2, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-6",
+      "name": { "zh": "第七代表综片", "en": "Representative heddle 7" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.043, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [0.06, 0.19, 0],
+      "assemblyStep": 4
+    },
+    {
+      "id": "heddle-7",
+      "name": { "zh": "第八代表综片", "en": "Representative heddle 8" },
+      "geometry": {
+        "type": "custom",
+        "builder": "loomHeddle",
+        "params": { "length": 0.1, "width": 0.004 }
+      },
+      "material": "wood",
+      "position": [-0.031, 0.335, 0],
+      "joint": { "kind": "prismatic", "axis": [0, 1, 0], "limits": [0, 0.05] },
+      "provenance": {
+        "kind": "tuice",
+        "ref": "xijingzaji-loom+sgz-majun-loom",
+        "note": "One of eight display heddles representing the recorded dozens of selectors and heddles."
+      },
+      "dimensionProvenance": {
+        "@rest": {
+          "kind": "tuice",
+          "ref": "kaogu-laoguanshan",
+          "note": "Representative heddle dimensions and lift limit."
+        }
+      },
+      "explodeVector": [0.08, 0.18, 0],
+      "assemblyStep": 4
+    }
+  ],
+  "constraints": [
+    {
+      "type": "cam",
+      "cam": "treadle-bank",
+      "follower": "selector-carriage",
+      "profile": "lift",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame selector",
+        "note": "The treadle produces the sliding selector's bounded 0.05 m display stroke."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-carriage",
+      "b": "single-hook",
+      "ratio": 0.4,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "single-hook selector",
+        "note": "The sliding frame transmits its bounded stroke into the representative 0.02 m hook travel."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "single-hook",
+      "b": "selector-cam-0",
+      "ratio": 314.1592653589793,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "First position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-1",
+      "ratio": 3,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Third position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-2",
+      "ratio": 5,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Fifth position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-3",
+      "ratio": 7,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Seventh position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-4",
+      "ratio": 2,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Second position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-5",
+      "ratio": 4,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Fourth position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-6",
+      "ratio": 6,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Sixth position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "selector-cam-0",
+      "b": "selector-cam-7",
+      "ratio": 8,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "sliding-frame program",
+        "note": "Eighth position in the eight-heddle demonstration program."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-0",
+      "follower": "heddle-0",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-1",
+      "follower": "heddle-1",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-2",
+      "follower": "heddle-2",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-3",
+      "follower": "heddle-3",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-4",
+      "follower": "heddle-4",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-5",
+      "follower": "heddle-5",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-6",
+      "follower": "heddle-6",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "cam",
+      "cam": "selector-cam-7",
+      "follower": "heddle-7",
+      "profile": "heddle",
+      "liftHeight": 0.05,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "eight-heddle simplification",
+        "note": "Representative bounded heddle lift."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "heddle-0",
+      "b": "warp-shed",
+      "ratio": 0.5,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "weaving shed",
+        "note": "The first representative heddle transmits half its lift into one warp layer."
+      }
+    },
+    {
+      "type": "lockstep",
+      "a": "heddle-4",
+      "b": "warp-shed-odd",
+      "ratio": 0.5,
+      "provenance": {
+        "kind": "tuice",
+        "ref": "weaving shed",
+        "note": "The fifth representative heddle transmits half its lift into the opposing warp layer."
+      }
+    }
+  ],
+  "driveNodes": ["treadle-bank"],
+  "primaryDrive": "treadle-bank",
+  "cycleRad": 6.283185307179586,
+  "expectedRatios": [],
+  "collisionWhitelist": [
+    ["warp-beam", "warp-shed"],
+    ["warp-beam", "warp-shed-odd"],
+    ["cloth-beam", "woven-cloth"],
+    ["treadle-bank", "selector-cam-0"],
+    ["treadle-bank", "selector-cam-1"],
+    ["treadle-bank", "selector-cam-2"],
+    ["treadle-bank", "selector-cam-3"],
+    ["treadle-bank", "selector-cam-4"],
+    ["treadle-bank", "selector-cam-5"],
+    ["treadle-bank", "selector-cam-6"],
+    ["treadle-bank", "selector-cam-7"],
+    ["warp-shed", "beater"],
+    ["warp-shed-odd", "beater"],
+    ["warp-shed", "heddle-0"],
+    ["warp-shed", "heddle-1"],
+    ["warp-shed", "heddle-2"],
+    ["warp-shed", "heddle-3"],
+    ["warp-shed", "heddle-4"],
+    ["warp-shed", "heddle-5"],
+    ["warp-shed", "heddle-6"],
+    ["warp-shed", "heddle-7"],
+    ["warp-shed-odd", "heddle-0"],
+    ["warp-shed-odd", "heddle-1"],
+    ["warp-shed-odd", "heddle-2"],
+    ["warp-shed-odd", "heddle-3"],
+    ["warp-shed-odd", "heddle-4"],
+    ["warp-shed-odd", "heddle-5"],
+    ["warp-shed-odd", "heddle-6"],
+    ["warp-shed-odd", "heddle-7"]
+  ]
+}
