@@ -8,6 +8,8 @@ const runtimeProcess = (
   }
 ).process;
 const originalApiKey = runtimeProcess.env.OPENAI_API_KEY;
+const originalGroq = runtimeProcess.env.GROQ;
+const originalGroqApiKey = runtimeProcess.env.GROQ_API_KEY;
 
 class MockRequest {
   method = "POST";
@@ -67,11 +69,15 @@ function restoreEnv(name: string, value: string | undefined) {
 
 afterEach(() => {
   restoreEnv("OPENAI_API_KEY", originalApiKey);
+  restoreEnv("GROQ", originalGroq);
+  restoreEnv("GROQ_API_KEY", originalGroqApiKey);
 });
 
 describe("docent serverless entrypoint", () => {
   it("returns the disabled probe shape when no API key is configured", async () => {
     delete runtimeProcess.env.OPENAI_API_KEY;
+    delete runtimeProcess.env.GROQ;
+    delete runtimeProcess.env.GROQ_API_KEY;
 
     const response = await invoke(
       JSON.stringify({

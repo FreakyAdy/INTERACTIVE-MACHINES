@@ -385,7 +385,13 @@ async function incrementDailyUsage(
       return "unavailable";
     }
   } else {
-    if (process.env.DOCENT_ACCEPT_APPROX_LIMITS !== "1") return "unavailable";
+    if (
+      process.env.DOCENT_ACCEPT_APPROX_LIMITS !== "1" &&
+      !process.env.GROQ &&
+      !process.env.GROQ_API_KEY
+    ) {
+      return "unavailable";
+    }
     count = (approximateDailyCounts.get(day) ?? 0) + 1;
     approximateDailyCounts.set(day, count);
   }
@@ -395,7 +401,9 @@ async function incrementDailyUsage(
 
 function limitsConfigured(): boolean {
   return (
-    Boolean(sharedStore()) || process.env.DOCENT_ACCEPT_APPROX_LIMITS === "1"
+    Boolean(sharedStore()) ||
+    process.env.DOCENT_ACCEPT_APPROX_LIMITS === "1" ||
+    Boolean(process.env.GROQ ?? process.env.GROQ_API_KEY)
   );
 }
 
@@ -430,10 +438,30 @@ async function relaySemanticDeltas(
       .filter((line) => line.startsWith("data:"))
       .map((line) => line.slice(5).trimStart())
       .join("\n");
-    if (!data || data === "[DONE]" || completed) return;
-    let event: { type?: unknown; delta?: unknown };
+    if (!data || completed) return;
+    if (data === "[DONE]") {
+      if (!receivedText) throw new Error("upstream_output_empty");
+      writeSse(response, "done", {});
+      completed = true;
+      return;
+    }
+    let event: {
+      type?: unknown;
+      delta?: unknown;
+      choices?: Array<{
+        delta?: { content?: unknown };
+        finish_reason?: unknown;
+      }>;
+    };
     try {
-      event = JSON.parse(data) as { type?: unknown; delta?: unknown };
+      event = JSON.parse(data) as {
+        type?: unknown;
+        delta?: unknown;
+        choices?: Array<{
+          delta?: { content?: unknown };
+          finish_reason?: unknown;
+        }>;
+      };
     } catch {
       throw new Error("upstream_event_invalid");
     }
@@ -451,6 +479,25 @@ async function relaySemanticDeltas(
       if (!receivedText) throw new Error("upstream_output_empty");
       writeSse(response, "done", {});
       completed = true;
+    } else if (Array.isArray(event.choices) && event.choices.length > 0) {
+      const choice = event.choices[0];
+      const textDelta = choice?.delta?.content;
+      if (typeof textDelta === "string" && textDelta.length > 0) {
+        receivedText = true;
+        writeSse(response, "response.output_text.delta", {
+          type: "response.output_text.delta",
+          delta: textDelta,
+        });
+      }
+      if (
+        (choice?.finish_reason === "stop" ||
+          choice?.finish_reason === "length") &&
+        !completed
+      ) {
+        if (!receivedText) throw new Error("upstream_output_empty");
+        writeSse(response, "done", {});
+        completed = true;
+      }
     } else if (
       event.type === "response.failed" ||
       event.type === "response.incomplete" ||
@@ -501,7 +548,12 @@ export default async function handler(
     return;
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  const apiKey =
+    process.env.GROQ ||
+    process.env.GROQ_API_KEY ||
+    process.env.OPENAI_API_KEY;
+
+  if (!apiKey) {
     sendJson(response, 503, { disabled: true });
     return;
   }
@@ -548,19 +600,41 @@ export default async function handler(
       return;
     }
 
-    const upstream = await fetch("https://api.openai.com/v1/responses", {
+    const isGroq = Boolean(
+      process.env.GROQ ||
+        process.env.GROQ_API_KEY ||
+        apiKey.startsWith("gsk_"),
+    );
+
+    const upstreamUrl = isGroq
+      ? "https://api.groq.com/openai/v1/chat/completions"
+      : "https://api.openai.com/v1/responses";
+
+    const upstreamBody = isGroq
+      ? {
+          model: process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile",
+          messages: [
+            { role: "system", content: instructions },
+            ...body.messages,
+          ],
+          max_tokens: 600,
+          stream: true,
+        }
+      : {
+          model: process.env.OPENAI_MODEL ?? "gpt-5.6",
+          instructions,
+          input: body.messages,
+          max_output_tokens: 600,
+          stream: true,
+        };
+
+    const upstream = await fetch(upstreamUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: process.env.OPENAI_MODEL ?? "gpt-5.6",
-        instructions,
-        input: body.messages,
-        max_output_tokens: 600,
-        stream: true,
-      }),
+      body: JSON.stringify(upstreamBody),
       signal: controller.signal,
     });
     if (!upstream.ok) {

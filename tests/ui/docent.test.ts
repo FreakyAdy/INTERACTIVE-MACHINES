@@ -27,6 +27,8 @@ const runtimeProcess = (
   }
 ).process;
 const originalApiKey = runtimeProcess.env.OPENAI_API_KEY;
+const originalGroq = runtimeProcess.env.GROQ;
+const originalGroqApiKey = runtimeProcess.env.GROQ_API_KEY;
 const originalApproximateLimits =
   runtimeProcess.env.DOCENT_ACCEPT_APPROX_LIMITS;
 const originalDailyBudget = runtimeProcess.env.DOCENT_DAILY_BUDGET;
@@ -111,8 +113,16 @@ function useApproximateLimits() {
   delete runtimeProcess.env.UPSTASH_REDIS_REST_TOKEN;
 }
 
+function clearApiKeys() {
+  delete runtimeProcess.env.OPENAI_API_KEY;
+  delete runtimeProcess.env.GROQ;
+  delete runtimeProcess.env.GROQ_API_KEY;
+}
+
 afterEach(() => {
   restoreEnv("OPENAI_API_KEY", originalApiKey);
+  restoreEnv("GROQ", originalGroq);
+  restoreEnv("GROQ_API_KEY", originalGroqApiKey);
   restoreEnv("DOCENT_ACCEPT_APPROX_LIMITS", originalApproximateLimits);
   restoreEnv("DOCENT_DAILY_BUDGET", originalDailyBudget);
   restoreEnv("KV_REST_API_URL", originalKvUrl);
@@ -159,7 +169,7 @@ describe.sequential("docent boundaries", () => {
   });
 
   it("accepts part context added by an authoritative reconstruction scheme", async () => {
-    delete runtimeProcess.env.OPENAI_API_KEY;
+    clearApiKeys();
     const response = await invoke(
       JSON.stringify({
         slug: "seismoscope",
@@ -175,12 +185,38 @@ describe.sequential("docent boundaries", () => {
   });
 
   it("fails closed when no server API key is configured", async () => {
-    delete runtimeProcess.env.OPENAI_API_KEY;
+    clearApiKeys();
     const response = await invoke(
       requestBody([{ role: "user", content: "What is this?" }]),
     );
     expect(response.statusCode).toBe(503);
     expect(response.json()).toEqual({ disabled: true });
+  });
+
+  it("streams responses from GROQ chat completions endpoint", async () => {
+    clearApiKeys();
+    runtimeProcess.env.GROQ = "test-groq-key";
+    useApproximateLimits();
+    globalThis.fetch = (async (url, init) => {
+      expect(url).toBe("https://api.groq.com/openai/v1/chat/completions");
+      expect((init as RequestInit).headers).toMatchObject({
+        Authorization: "Bearer test-groq-key",
+      });
+      const sseStream =
+        'data: {"choices":[{"delta":{"content":"Zhang Heng designed it."}}]}\n\ndata: [DONE]\n\n';
+      return new Response(sseStream, {
+        status: 200,
+        headers: { "Content-Type": "text/event-stream" },
+      });
+    }) as typeof fetch;
+
+    const response = await invoke(
+      requestBody([{ role: "user", content: "Who built it?" }]),
+      { "x-forwarded-for": "192.0.2.88" },
+    );
+
+    expect(response.statusCode).toBe(200);
+    expect(response.chunks.join("")).toContain("Zhang Heng designed it.");
   });
 
   it("rate-limits the eleventh request from one IP", async () => {
