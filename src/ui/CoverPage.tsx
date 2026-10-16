@@ -28,7 +28,7 @@ export default function CoverPage() {
       </svg>
 
       <header className="cover-header">
-        <span className="cover-brand">Mechanica</span>
+        <span className="cover-brand">The Inventor's Secret</span>
         <span className="cover-pill">Interactive Exhibition</span>
       </header>
 
