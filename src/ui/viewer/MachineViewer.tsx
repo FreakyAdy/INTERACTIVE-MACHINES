@@ -845,17 +845,17 @@ function radialExplodeVector(part: PartDef) {
 type InspectionState = "hovered" | "selected";
 
 const hoveredOutlineMaterial = new MeshBasicMaterial({
-  color: "#10b981",
+  color: "#d4af37",
   depthWrite: false,
-  opacity: 0.72,
+  opacity: 0.75,
   side: BackSide,
   toneMapped: false,
   transparent: true,
 });
 const selectedOutlineMaterial = new MeshBasicMaterial({
-  color: "#34d399",
+  color: "#f3cf65",
   depthWrite: false,
-  opacity: 0.92,
+  opacity: 0.95,
   side: BackSide,
   toneMapped: false,
   transparent: true,
@@ -940,19 +940,19 @@ function applyTransientMaterialState(
   }
   if (state.inspectionState) {
     material.emissive.set(
-      state.inspectionState === "selected" ? "#10b981" : "#065f46",
+      state.inspectionState === "selected" ? "#d4af37" : "#7d5d20",
     );
     material.emissiveIntensity =
       state.inspectionState === "selected" ? 1.5 : 0.9;
   }
   if (state.assemblyStaged) {
-    material.color.set("#10b981");
-    material.emissive.set("#047857");
+    material.color.set("#d4af37");
+    material.emissive.set("#835d22");
     material.emissiveIntensity = 1.45;
     material.roughness = Math.min(material.roughness, 0.58);
   }
   if (state.assemblyHighlighted) {
-    material.emissive.set("#10b981");
+    material.emissive.set("#e5c158");
     material.emissiveIntensity = 1.6;
   }
   if (state.assemblyError) {
@@ -2015,7 +2015,7 @@ function AssemblyStagingGround({
   return (
     <>
       <gridHelper
-        args={[layout.size, layout.divisions, "#10b981", "#162e22"]}
+        args={[layout.size, layout.divisions, "#d4af37", "#44341c"]}
         position={[
           layout.center[0],
           assembly.plan.stagingGroundY + 0.0005,
@@ -2046,7 +2046,7 @@ function AssemblyStagingGround({
             ]}
           />
           <meshBasicMaterial
-            color="#10b981"
+            color="#d4af37"
             depthTest={false}
             depthWrite={false}
             transparent
@@ -2302,20 +2302,20 @@ function MachineScene({
         />
       ) : (
         <>
-          <color args={["#060807"]} attach="background" />
+          <color args={["#0c0a08"]} attach="background" />
           <hemisphereLight
-            args={["#d7e3ef", "#0d1f17", 0.45]}
+            args={["#fff0d4", "#24180e", 0.45]}
             position={[0, 2, 0]}
           />
           <directionalLight
             castShadow
-            color="#ecfdf5"
+            color="#ffe3b5"
             intensity={2.2}
             position={[3, 5, 4]}
           />
           <directionalLight
-            color="#10b981"
-            intensity={0.4}
+            color="#c8923a"
+            intensity={0.5}
             position={[-4, 2, -3]}
           />
         </>

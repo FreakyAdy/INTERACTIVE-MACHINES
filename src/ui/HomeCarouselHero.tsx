@@ -411,9 +411,9 @@ function RoundPlatform({ radius }: { radius: number }) {
       <mesh position={[0, PLATFORM_TOP / 2, 0]}>
         <cylinderGeometry args={[radius, radius, PLATFORM_TOP, 72]} />
         <meshStandardMaterial
-          color="#101814"
-          metalness={0.2}
-          roughness={0.6}
+          color="#16120e"
+          metalness={0.4}
+          roughness={0.5}
         />
       </mesh>
       <mesh
@@ -421,10 +421,10 @@ function RoundPlatform({ radius }: { radius: number }) {
         rotation={[-Math.PI / 2, 0, 0]}
       >
         <ringGeometry
-          args={[radius * 0.72, radius * 0.725, 72, 1, 0, Math.PI * 2]}
+          args={[radius * 0.72, radius * 0.728, 72, 1, 0, Math.PI * 2]}
         />
         <meshBasicMaterial
-          color="#10b981"
+          color="#d4af37"
           polygonOffset
           polygonOffsetFactor={-2}
           polygonOffsetUnits={-2}
@@ -491,21 +491,21 @@ function WarmLightRig() {
   }, []);
   return (
     <>
-      <ambientLight color="#d8b46c" intensity={0.08} />
-      <hemisphereLight args={["#ead7b2", "#211811", 0.13]} />
-      <directionalLight color="#ffe1b6" intensity={0.55} position={[3, 5, 4]} />
+      <ambientLight color="#d4af37" intensity={0.16} />
+      <hemisphereLight args={["#fff0d4", "#24180e", 0.35]} />
+      <directionalLight color="#ffe1b6" intensity={1.1} position={[3, 5, 4]} />
       <directionalLight
-        color="#b88a5a"
-        intensity={0.18}
+        color="#c8923a"
+        intensity={0.45}
         position={[-4, 2, -3]}
       />
       <spotLight
-        angle={0.45}
-        color="#ffc66f"
+        angle={0.48}
+        color="#ffdb8c"
         decay={2}
-        distance={12}
-        intensity={110}
-        penumbra={0.6}
+        distance={14}
+        intensity={130}
+        penumbra={0.65}
         position={[0, 6.5, 1.8]}
         ref={light}
       />
@@ -701,7 +701,7 @@ function TurntableStage({
       }}
       onCreated={prepareSceneEnvironment}
     >
-      <color args={["#060807"]} attach="background" />
+      <color args={["#0c0a08"]} attach="background" />
       <SceneEnvironment />
       <FixedCamera />
       <WarmLightRig />
@@ -795,79 +795,140 @@ export default function HomeCarouselHero({
       ref={heroRef}
       tabIndex={0}
     >
-      <header className="home-carousel-heading">
-        <p className="eyebrow">{t("home.eyebrow")}</p>
-        <h1 className="display-title">{t("home.title")}</h1>
-        <p className="hero-copy">{t("home.intro")}</p>
-      </header>
-      <div
-        className="home-turntable-stage"
-        data-mounted-machine-count={mountedMachineCount}
-        data-testid="home-turntable"
-      >
-        {compact ? (
-          <a className="home-carousel-poster-link" href={`#/m/${activeSlug}`}>
-            <img
-              alt=""
-              className="home-carousel-poster"
-              src={`${import.meta.env.BASE_URL}assets/renders/${activeSlug}/overall.jpg`}
-            />
-          </a>
-        ) : (
-          <TurntableStage
-            modulesBySlug={modulesBySlug}
-            onActiveIndexChange={setActiveIndex}
-            onActivate={activateMachine}
-            paused={paused}
-            reducedMotion={reduceMotion}
-            rendering={rendering}
-            request={turnRequest}
-            slugs={slugs}
-          />
-        )}
-        {!compact && Object.keys(modulesBySlug).length === 0 && progress ? (
-          <GeometryLoading
-            built={progress.built}
-            label={t("app.loading")}
-            scope="home-turntable"
-            total={progress.total}
-          />
+      <div className="home-hero-content-column">
+        <header className="home-carousel-heading">
+          <p className="eyebrow">{t("home.eyebrow")}</p>
+          <h1 className="display-title">{t("home.title")}</h1>
+          <p className="hero-copy">{t("home.intro")}</p>
+        </header>
+
+        {activeData ? (
+          <div className="home-showcase-card">
+            <div className="showcase-era-badge">
+              <span className="era-star">✦</span>
+              <span>{activeData.era?.[language] ?? "Classical Engineering"}</span>
+            </div>
+            <a
+              aria-live="polite"
+              className="home-carousel-machine-copy"
+              data-testid="home-active-machine"
+              href={`#/m/${activeSlug}`}
+              key={activeSlug}
+            >
+              <div className="machine-index-row">
+                <span className="machine-index">
+                  № {String(activeIndex + 1).padStart(2, "0")} / 04
+                </span>
+                {activeData.inventors?.length ? (
+                  <span className="machine-inventors">
+                    {activeData.inventors.map((inv) => inv[language]).join(", ")}
+                  </span>
+                ) : null}
+              </div>
+              <span className="home-carousel-machine-text">
+                <strong>{activeData.names[language]}</strong>
+                <span>{activeData.oneLiner[language]}</span>
+              </span>
+              <span className="machine-open">
+                <span className="open-label">{t("home.open")}</span>
+                <span className="open-arrow">→</span>
+              </span>
+            </a>
+          </div>
         ) : null}
+
+        <div className="home-machine-selector-wrap">
+          <div className="selector-heading">Exhibition Masterworks</div>
+          <div className="home-machine-pills" role="group">
+            {slugs.map((slug, index) => {
+              const data = dataBySlug[slug];
+              const isSelected = index === activeIndex;
+              return (
+                <button
+                  aria-pressed={isSelected}
+                  className={`catalog-pill-btn ${isSelected ? "selected" : ""}`}
+                  data-machine-slug={slug}
+                  data-testid="home-machine-pill"
+                  key={slug}
+                  onClick={() => turnToMachine(index)}
+                  type="button"
+                >
+                  <span className="pill-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="pill-text-wrap">
+                    <strong className="pill-title">
+                      {data?.names[language] ?? slug}
+                    </strong>
+                    <span className="pill-era">
+                      {data?.era?.[language]?.split("，")[0]?.split(",")[0] ?? "Classical Era"}
+                    </span>
+                  </span>
+                  <span className="pill-arrow-indicator">›</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
-      {activeData ? (
-        <a
-          aria-live="polite"
-          className="home-carousel-machine-copy"
-          data-testid="home-active-machine"
-          href={`#/m/${activeSlug}`}
-          key={activeSlug}
+
+      <div className="home-hero-stage-column">
+        <div
+          className="home-turntable-stage"
+          data-mounted-machine-count={mountedMachineCount}
+          data-testid="home-turntable"
         >
-          <span className="machine-index">
-            {String(activeIndex + 1).padStart(2, "0")}
-          </span>
-          <span className="home-carousel-machine-text">
-            <strong>{activeData.names[language]}</strong>
-            <span>{activeData.oneLiner[language]}</span>
-          </span>
-          <span className="machine-open">{t("home.open")}</span>
-        </a>
-      ) : null}
-      <div className="home-machine-pills" role="group">
-        {slugs.map((slug, index) => {
-          const data = dataBySlug[slug];
-          return (
+          {compact ? (
+            <a className="home-carousel-poster-link" href={`#/m/${activeSlug}`}>
+              <img
+                alt=""
+                className="home-carousel-poster"
+                src={`${import.meta.env.BASE_URL}assets/renders/${activeSlug}/overall.jpg`}
+              />
+            </a>
+          ) : (
+            <TurntableStage
+              modulesBySlug={modulesBySlug}
+              onActiveIndexChange={setActiveIndex}
+              onActivate={activateMachine}
+              paused={paused}
+              reducedMotion={reduceMotion}
+              rendering={rendering}
+              request={turnRequest}
+              slugs={slugs}
+            />
+          )}
+          {!compact && Object.keys(modulesBySlug).length === 0 && progress ? (
+            <GeometryLoading
+              built={progress.built}
+              label={t("app.loading")}
+              scope="home-turntable"
+              total={progress.total}
+            />
+          ) : null}
+
+          <div className="turntable-controls-bar">
             <button
-              aria-pressed={index === activeIndex}
-              data-machine-slug={slug}
-              data-testid="home-machine-pill"
-              key={slug}
-              onClick={() => turnToMachine(index)}
+              aria-label="Previous exhibit"
+              className="turntable-nav-btn prev"
+              onClick={() => turnQuarter(1)}
               type="button"
             >
-              {data?.names[language] ?? slug}
+              ◂
             </button>
-          );
-        })}
+            <span className="turntable-hint-text">
+              Drag to spin turntable · Click to explore
+            </span>
+            <button
+              aria-label="Next exhibit"
+              className="turntable-nav-btn next"
+              onClick={() => turnQuarter(-1)}
+              type="button"
+            >
+              ▸
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
