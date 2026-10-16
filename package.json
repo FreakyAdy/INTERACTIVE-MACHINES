@@ -18,7 +18,8 @@
     "render-assets": "node scripts/render-renders.mjs",
     "extract": "node scripts/extract-parts.mjs",
     "audit": "node scripts/audit-llm.mjs",
-    "artifacts:check": "node scripts/check-artifacts.mjs"
+    "artifacts:check": "node scripts/check-artifacts.mjs",
+    "export:pitch": "node scripts/export-pitch-assets.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.4",

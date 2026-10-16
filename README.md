@@ -89,6 +89,13 @@ Each machine features interactive controls: run/pause simulation, step-by-step p
 
 ![Interactive 3D Machine Viewer](./assets/interactive-viewer.jpg)
 
+### 3. Motion Graphic Pitch Film (1080p 60FPS)
+An original motion graphic experience presenting the narrative, mathematical kinematics, three-tier provenance engine, and grounded AI Docent:
+
+[![The Inventor's Secret — Pitch Film](./assets/pitch-film-card.jpg)](./The%20Inventor's%20Secret%20—%20Pitch%20Film.html)
+
+> 💡 **[▶ Open Interactive Pitch Film](./The%20Inventor's%20Secret%20—%20Pitch%20Film.html)** — *Operate the full 6-chapter film directly in the browser with interactive scene scrubbing and synthesized harmonic audio.*
+
 ---
 
 ## 🔬 What Makes It Genuinely Innovative
@@ -246,4 +253,4 @@ The models and dimensions in this repository cite the following historical recor
 
 ## 📄 License
 
-MIT © Caleb Wei and Mechanica Contributors. Physical and archival dimensions follow open academic research records under the provisions in [`MECHANICA_PLAN_EN.md`](./MECHANICA_PLAN_EN.md).
+MIT © 

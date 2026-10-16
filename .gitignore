@@ -14,3 +14,5 @@ coverage/
 .gstack/
 output/
 .playwright-cli/
+*.mp4
+scratch/
