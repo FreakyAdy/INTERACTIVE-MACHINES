@@ -1,0 +1,5 @@
+slug,tier,schemes,notes,status
+astroclock,S,"fixed-scoop|combridge-hinged",escapement state machine + five-tier chime,DONE
+seismoscope,S,"wangzhenduo|fengrui",the dual schemes are the soul,DONE
+odometer,A,"ludaolong",golden ratios 1/100 and 1/1000,DONE
+loom,A,"sliding-frame|linkage",sliding-frame/linkage dual schemes,DONE
