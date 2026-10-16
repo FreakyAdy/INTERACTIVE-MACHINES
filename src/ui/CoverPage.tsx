@@ -58,9 +58,6 @@ export default function CoverPage() {
           </section>
         </div>
 
-        <p className="cover-signature">
-          Original creation by Caleb Wei and Mechanica contributors · Preserved and rendered in full interactive fidelity
-        </p>
 
         <div className="cover-actions">
           <a className="cover-enter" data-testid="cover-enter" href="#/museum">
